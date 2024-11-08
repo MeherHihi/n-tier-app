@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.container.name }}
+  namespace: {{ .Values.namespace }}
+spec:
+  selector:
+    matchLabels:
+      {{- include "application.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "application.selectorLabels" . | nindent 8 }}
+    spec:
+      containers:
+        - name: {{ .Values.container.name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: {{ .Values.container.port }}          
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+          env:
+            - name: SPRING_POSTGRES_USERNAME
+              value: {{ .Values.postgres.spring_postgres_username }}
+            - name: SPRING_POSTGRES_PASSWORD
+              value: {{ .Values.postgres.spring_postgres_password }}
+            - name: SPRING_POSTGRES_URL
+              value: {{ .Values.postgres.spring_postgres_url }}
