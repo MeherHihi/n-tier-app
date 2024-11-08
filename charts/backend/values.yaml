@@ -1,0 +1,23 @@
+namespace: ns-n-tier-app
+container:
+  name: backend
+image:
+  pullPolicy: IfNotPresent
+  repository: gcr.io/google-samples/hello-go-gke
+  tag: 1.0
+resources:
+  limits:
+    cpu: 400m
+    memory: 512Mi
+  requests:
+    cpu: 100m
+    memory: 512Mi
+postgres:
+  spring_postgres_username: "myapplication"
+  spring_postgres_password: "M3P@ssw0rd"
+  spring_postgres_url: "my-db-test.io"
+service:
+  name: backend-service
+  port: 80
+  protocol: TCP
+  targetPort: http
