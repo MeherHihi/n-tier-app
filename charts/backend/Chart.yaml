@@ -1,0 +1,23 @@
+apiVersion: v2
+name: backend
+description: backend Helm Chart
+
+type: application
+
+version: 1.0
+
+appVersion: 1.0
+
+keywords:
+  - helm
+  - java
+  - kubernetes
+  - postgresql
+
+sources:
+  - https://github.com/MeherHihi/n-tier-app
+
+maintainers:
+  - name: Meher HIHI
+    mail: meherhihi@gmail.com
+    url: https://github.com/MeherHihi
